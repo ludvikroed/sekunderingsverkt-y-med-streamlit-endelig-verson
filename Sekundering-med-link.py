@@ -45,6 +45,7 @@ if "hvis_starttider" not in st.session_state:
 			if send:
 				st.session_state["uploaded_file"] = 1
 				numbers = url_input.split("/")[-1].split("#")[0]
+				st.session_state["løpe_id"] = numbers
 				url = "https://live.eqtiming.com/api//Report/221?eventId=" + str(numbers)
 				st.session_state["url"] = url
 				st.write('Trykk på "velg løpere" for å velge hvilke løpere du vil sekundere.')
@@ -466,7 +467,11 @@ if "hvis_starttider" in st.session_state:
 	if st.session_state.antall_løpere == 6:
 		løper_seks_navninput = st.session_state['løper_seks_navninput']
 
-	tab1, tab2, tab3  = st.tabs(["Sekundering", "Logg", "Startliste"])
+	tab1, tab2, tab3, tab4  = st.tabs(["Sekundering", "Logg", "Startliste", "Link resultater"])
+	with tab4:
+		st.write("Her er link til resultatlista:")
+		st.write("https://live.eqtiming.com/" + str(st.session_state["løpe_id"]) + "#result")
+
 	overskrift.empty()
 
 	if "antall_passeringer" not in st.session_state:
