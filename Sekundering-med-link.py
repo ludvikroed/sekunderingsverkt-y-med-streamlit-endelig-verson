@@ -9,19 +9,20 @@ overskrift = st.empty()
 tabs = st.empty()
 container_filer = st.empty()
 
+try:
+	if send:
+		st.session_state["uploaded_file"] = 1
+except:
+	mongo = "monog"
+
+if "uploaded_file" not in st.session_state:
+	st.session_state["uploaded_file"] = 0
+
 if "antall_løpere" not in st.session_state:
 	st.session_state.antall_løpere = 0
 
 with overskrift:
   st.title('Sekunderingsverktøy')
-
-if "resatt" not in st.session_state:
-	if "hvis_starttider" not in st.session_state:
-		tab1, tab2, tab3 = st.tabs(["Fil", "Velg løpere", "Startlister"])
-
-if "resatt" in st.session_state:
-	if "hvis_starttider" not in st.session_state:
-		tab2, tab3 = st.tabs(["Velg løpere", "Startlister"])
 
 
 cols = ["Startnummer:","Fornavn:", "Etternavn:", "Klasse:", "Starttid:"]
@@ -30,26 +31,29 @@ startliste_row = []
 
 hvis_løpere = 1
 
-if "uploaded_file" not in st.session_state:
-	st.session_state["uploaded_file"] = 0
 
 if "hvis_starttider" not in st.session_state:
 	hvis_løpere = 0
 	if "resatt" not in st.session_state:
-		with tab1:
+		if st.session_state["uploaded_file"] == 0:
 			st.write("Kopier linken fra ditt renn på eqtiming")
 			st.write("Gå inn på rennet ditt å trykk på deltakere. Derretter kopierer du linken og limer den inn her:")
 			url_input = st.text_input("Lim inn linken til eqtiming her:")
+			mongo = "mongo"
 			send = st.button("Send")
+
 			if send:
 				st.session_state["uploaded_file"] = 1
 				numbers = url_input.split("/")[-1].split("#")[0]
 				url = "https://live.eqtiming.com/api//Report/221?eventId=" + str(numbers)
 				st.session_state["url"] = url
 				st.write('Trykk på "velg løpere" for å velge hvilke løpere du vil sekundere.')
-				st.session_state
+				st.experimental_rerun()
 
-	
+	if st.session_state["uploaded_file"] == 1:
+		if "hvis_starttider" not in st.session_state:
+			tab2, tab3 = st.tabs(["Velg løpere", "Startlister"])
+		
 	
 	if st.session_state["uploaded_file"] == 1:
 		if "resatt" not in st.session_state:
@@ -1028,4 +1032,3 @@ if "hvis_starttider" in st.session_state:
 		except:
 			mongo = "mongo"
 		del st.session_state["antall_løpere"]
-		
