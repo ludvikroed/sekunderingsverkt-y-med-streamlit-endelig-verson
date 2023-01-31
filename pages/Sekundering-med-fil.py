@@ -510,7 +510,6 @@ if "hvis_starttider" in st.session_state:
 				if a == 1:
 					st.write(st.session_state["løper_en_navninput"] + " har passert")
 
-
 				passerings_logg = str(st.session_state["lapping_for_en"]) + "logg"
 
 				if passerings_logg not in st.session_state:

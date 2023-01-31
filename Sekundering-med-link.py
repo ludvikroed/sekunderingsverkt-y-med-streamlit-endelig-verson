@@ -81,6 +81,7 @@ if "hvis_starttider" not in st.session_state:
 					starttid = (løper['@starttid'])
 					startnr = (løper['@startno'])
 
+
 					if klasse != siste_klasse:
 						if siste_klasse != 0:
 							klasser_dict[siste_klasse] = siste_klasse   
@@ -1027,3 +1028,4 @@ if "hvis_starttider" in st.session_state:
 		except:
 			mongo = "mongo"
 		del st.session_state["antall_løpere"]
+		

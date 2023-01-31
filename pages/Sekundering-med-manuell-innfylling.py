@@ -230,7 +230,6 @@ if "starttider" in st.session_state:
       løper_seks_start = regn_starttid(løper_seks_startinput)
       st.session_state["løper_seks_start"] = løper_seks_start
     
-
   with tab1:
     st.header("Sekundering")
     st.write('Trykk på navnet til løperen som passerer:')
