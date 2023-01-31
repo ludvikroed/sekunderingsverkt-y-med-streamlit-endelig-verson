@@ -469,7 +469,7 @@ if "hvis_starttider" in st.session_state:
 
 	tab1, tab2, tab3, tab4  = st.tabs(["Sekundering", "Logg", "Startliste", "Link resultater"])
 	with tab4:
-		st.write("Her er link til resultatlista:")
+		st.write("Her er link til resultatliste:")
 		st.write("https://live.eqtiming.com/" + str(st.session_state["løpe_id"]) + "#result")
 
 	overskrift.empty()
